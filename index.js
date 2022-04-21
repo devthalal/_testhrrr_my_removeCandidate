@@ -9,6 +9,14 @@ import { getBody, getDB, sendResponse, shieldApi } from "./utils.js";
  */
 const removeCandidate = async (req, res) => {
   try {
+
+    if (req.params["health"] === "health") {
+      return sendResponse(res, 200, {
+        success: true,
+        msg: "Health check success",
+      });
+    }
+
     const DB_FILE = path.resolve("../localdb.json");
     const localDB = getDB(DB_FILE);
     const { id } = await getBody(req);
@@ -29,4 +37,4 @@ const removeCandidate = async (req, res) => {
   }
 };
 
-export default { removeCandidate };
+export default removeCandidate;
